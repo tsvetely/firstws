@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Search</title>
+</h:head>
+<h:body>
+    <f:view>
+        <h:form>
+            <p:menuButton value="Option">
+                <p:menuitem value="Add" url="http://localhost:8080/add.xhtml"/>
+                <p:menuitem value="SearchId" url="http://localhost:8080/searchById.xhtml"/>
+                <p:separator/>
+            </p:menuButton>
+        </h:form>
+
+        <p:separator/>
+
+        <h:form prependId="false">
+            <p:panel id="panel">
+                <h2>Search By Skill</h2>
+
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="skill" value="Skills: "/>
+                    <p:selectOneMenu id="skill" value="#{skillsBean.skill}">
+                        <f:selectItem itemLabel="Select Skill" itemValue=" " noSelectionOption="true"/>
+                        <f:selectItems value="#{skillsBean.skillsValues}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <br/><br/><br/>
+                <p:commandButton value="Search"
+                                 action="#{employeesController.getEmployeeBySkills(skillsBean.skill)}"
+                                 ajax="false"/>
+
+            </p:panel>
+
+            <p:separator/>
+
+            <p:panel>
+                <h2>Result of searching</h2>
+                <h:panelGrid columns="1">
+                    <p:dataTable value="#{employeesController.getEmployeeBySkills(skillsBean.skill)}"
+                                 var="employeeTable" emptyMessage="No Result">
+                        <p:column width="5%" headerText="Id">
+                            <h:outputText value="#{employeeTable.employeeId}"/>
+                        </p:column>
+                        <p:column headerText="Employee's First Name">
+                            <h:outputText value="#{employeeTable.firstName}"/>
+                        </p:column>
+                        <p:column headerText="Employee's Last Name">
+                            <h:outputText value="#{employeeTable.lastName}"/>
+                        </p:column>
+                        <p:column headerText="Employee's Position">
+                            <h:outputText value="#{employeeTable.position}"/>
+                        </p:column>
+                        <p:column headerText="Employee's Skills">
+                            <h:outputText value="#{employeeTable.skills}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </f:view>
+</h:body>
+</html>

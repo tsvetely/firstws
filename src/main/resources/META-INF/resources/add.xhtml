@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Add employee</title>
+</h:head>
+<h:body>
+    <f:view>
+        <h:form>
+            <p:menuButton value="Search">
+                <p:menuitem value="SearchID" url="http://localhost:8080/searchById.xhtml"/>
+                <p:menuitem value="SearchSkill" url="http://localhost:8080/searchBySkill.xhtml"/>
+                <p:separator/>
+            </p:menuButton>
+        </h:form>
+        <h:form prependId="false">
+            <h2>Added Employees</h2>
+            <h:form>
+                <p:panel id="panel">
+
+                    <p:messages id="msgs"/>
+
+                    <h:panelGrid columns="2" cellpadding="6">
+                        <p:outputLabel for="firstname" value="Firstname:"/>
+                        <p:inputText id="firstname" value="#{employee.firstName}" required="true" label="Firstname">
+                            <f:validateLength minimum="1"/>
+                        </p:inputText>
+<!--                        <p:message for="firstname" style="color: red"/>-->
+                        <p:message for="firstname" display="icon"/>
+
+                        <p:outputLabel for="lastname" value="Lastname:"/>
+                        <p:inputText id="lastname" value="#{employee.lastName}" label="Lastname" required="true">
+                            <f:validateLength minimum="1"/>
+                        </p:inputText>
+<!--                        <p:message for="lastname" style="color: red"/>-->
+                        <p:message for="lastname" id="msgLastname" display="icon"/>
+
+                        <p:outputLabel for="position" value="Position:"/>
+                        <p:inputText id="position" value="#{employee.position}" label="Position" required="true">
+                            <f:validateLength minimum="2"/>
+                        </p:inputText>
+<!--                        <p:message for="position" style="color: red"/>-->
+                        <p:message for="position" style="color: red" id="msgPosition" display="icon"/>
+
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="2" cellpadding="6">
+                    <h:outputLabel for="idDept" value="Skills: "/>
+                    <p:selectCheckboxMenu id="idDept" value="#{employee.skills}"
+                                          label="Skills"
+                                          multiple="true"
+                                          panelStyle="width:350px">
+                        <f:selectItems filter="false" value="#{skillsBean.skillsValues}"/>
+                    </p:selectCheckboxMenu>
+                    </h:panelGrid>
+
+                    <p:commandButton value="Submit" action="confirm" />
+                </p:panel>
+
+            </h:form>
+
+            <p:separator/>
+
+            <p:panel id="panelTable">
+                <h2>All Employee</h2>
+                <h:panelGrid columns="1">
+                    <p:dataTable var="employeeTable" value="#{employeesController.getEmployees()}">
+                        <p:column width="5%" headerText="Id">
+                            <h:outputText value="#{employeeTable.employeeId}"/>
+                        </p:column>
+                        <p:column headerText="Employee's First Name">
+                            <h:outputText value="#{employeeTable.firstName}"/>
+                        </p:column>
+                        <p:column headerText="Employee's Last Name">
+                            <h:outputText value="#{employeeTable.lastName}"/>
+                        </p:column>
+                        <p:column headerText="Employee's Position">
+                            <h:outputText value="#{employeeTable.position}"/>
+                        </p:column>
+                        <p:column headerText="Employee's Skills">
+                            <h:outputText value="#{employeeTable.skills}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </f:view>
+</h:body>
+</html>

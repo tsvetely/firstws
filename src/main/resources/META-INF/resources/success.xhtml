@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:t="http://xmlns.jcp.org/jsf/passthrough">
+<style type="text/css">
+    .ui-panelgrid .ui-grid-responsive .ui-panelgrid-cell {
+        text-align: left;
+    }
+</style>
+<h:head>
+    <title>Confirm Employee</title>
+</h:head>
+<h:body>
+    <f:view>
+        <h:form>
+            <p:menuButton value="GO">
+                <p:menuitem value="Add" url="http://localhost:8080/add.xhtml"/>
+                <p:menuitem value="SearchID" url="http://localhost:8080/searchById.xhtml"/>
+                <p:menuitem value="SearchSkill" url="http://localhost:8080/searchBySkill.xhtml"/>
+                <p:separator/>
+            </p:menuButton>
+        </h:form>
+        <p:separator/>
+        <h:form>
+            <p:panel>
+                <h2>Success Screen</h2>
+                <p:panelGrid columns="2" styleClass="ui-widget-header">
+
+                    <h:outputText value="Employee First Name: "/>
+                    <h:outputText value="#{employee.firstName}"/>
+
+                    <h:outputText value="mployee Last Name: "/>
+                    <h:outputText value="#{employee.lastName}"/>
+
+                    <h:outputText value="Position: "/>
+                    <h:outputText value="#{employee.position}"/>
+
+                    <h:outputText value="Skills :"/>
+                    <h:outputText value="#{employee.skills}"/>
+                </p:panelGrid>
+            </p:panel>
+
+            <p:separator/>
+
+            <h:outputText value="Successful added employee!" style="color: blue; font-size:30px; text-align: center"/>
+        </h:form>
+    </f:view>
+</h:body>
+</html>
